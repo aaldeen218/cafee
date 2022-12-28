@@ -229,7 +229,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                               if (myController
                                                   .text.isNotEmpty) {
                                                 var p = PreInvoices(
-                                                    bid: "P-" +
+                                                    bid: "B-" +
                                                         randomInt(1000000,
                                                                 9999999)
                                                             .toString(),
