@@ -81,7 +81,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                             children: [
                               Text(
                                 "معلومات المستخدم",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: Dimensions.fontSize_15),
                                 textAlign: TextAlign.center,
                               ),
                               Divider(
@@ -93,6 +95,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                 ufullname,
                                 style: TextStyle(
                                     color: Colors.black,
+                                    fontSize: Dimensions.Size_20,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
@@ -124,7 +127,15 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                                 .pushReplacementNamed(
                                                     login.name_route);
                                           },
-                                          child: Text("تسجيل الخروج")),
+                                          child: Text(
+                                            "تسجيل الخروج",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Dimensions.fontSize_15),
+                                          )),
+                                      SizedBox(
+                                        width: Dimensions.Size_10,
+                                      ),
                                       ElevatedButton(
                                           style: ButtonStyle(
                                             foregroundColor:
@@ -138,7 +149,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text("موافق")),
+                                          child: Text(
+                                            "موافق",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Dimensions.fontSize_15),
+                                          )),
                                     ],
                                   )
                                 ],
@@ -162,7 +178,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                           fontSize: Dimensions.homePagefontSizeHedar),
                     ),
                     SizedBox(
-                      width: 25,
+                      width: Dimensions.homePageIconSize,
                     ),
                   ],
                 ),
@@ -289,8 +305,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
         ),
         bottomNavigationBar: NavigationBar(
           backgroundColor: appBarColor2,
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          animationDuration: Duration(milliseconds: 1500),
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+          animationDuration: Duration(milliseconds: 1000),
           selectedIndex: index,
           height: Dimensions.Size_60,
           onDestinationSelected: (x) => setState(() {
@@ -298,11 +314,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             //   index = x;
             // });
             _pageViewController.animateToPage(x,
-                duration: Duration(milliseconds: 2000),
+                duration: Duration(milliseconds: 1500),
                 curve: Curves.elasticOut);
           }),
           destinations: [
             NavigationDestination(
+                tooltip: "الطلبات",
                 icon: Icon(
                   Icons.home_outlined,
                   color: Colors.white,
@@ -312,8 +329,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   Icons.home,
                   size: Dimensions.Size_30,
                 ),
-                label: "الطبات"),
+                label: ""),
             NavigationDestination(
+                tooltip: "المنيو",
                 icon: Icon(
                   CupertinoIcons.square_list,
                   color: Colors.white,
@@ -323,8 +341,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   CupertinoIcons.square_list_fill,
                   size: Dimensions.Size_30,
                 ),
-                label: "المينيو"),
+                label: ""),
             NavigationDestination(
+                tooltip: "الفواتير السابقة",
                 icon: Icon(
                   Icons.history_outlined,
                   color: Colors.white,
@@ -334,7 +353,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                   Icons.history,
                   size: Dimensions.Size_30,
                 ),
-                label: "السابقة "),
+                label: ""),
           ],
         ));
   }
@@ -360,7 +379,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             } else {
               return Center(
                 child: (Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(Dimensions.Size_10),
                   child: show(snapshot, context),
                 )),
               );
@@ -384,14 +403,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           child: Card(
             elevation: 3,
             color: Color(0xFFDAF1EC),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.Size_10 / 2)),
             child: Row(
               children: [
                 Expanded(
                   flex: 4,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "طاولة  " + snapshot.data![i].bnote,
@@ -460,7 +479,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
         );
       },
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: Get.context!.width < 900 ? 2 : 3,
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
       ),
