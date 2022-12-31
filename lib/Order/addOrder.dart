@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../MyHomeScreen.dart';
+import '../dimension.dart';
 import '../mainColor.dart';
 import '../pre_invoice/PreInvoice.dart';
 import 'package:intl/intl.dart';
@@ -46,47 +47,62 @@ class _addOrderState extends State<addOrder> {
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
     print(arg_home["table"].toString() + "1----------------");
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor2,
-        actions: [
-          TextButton.icon(
-              icon: Icon(
-                Icons.print,
-                color: Colors.white,
+        body: Column(children: [
+      Container(
+        height: Dimensions.homePageAppHeight,
+        color: appBarColor2,
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Container(
+            child: TextButton(
+              child: Text(
+                "رجوع",
+                style: TextStyle(
+                    color: Colors.white, fontSize: Dimensions.Size_30 / 2),
               ),
               onPressed: () {
-                save_data(arg_home, true);
+                Navigator.of(context).popAndPushNamed(MyHomeScreen.name_route);
+              },
+            ),
+          ),
+          Spacer(),
+          Container(
+            child: TextButton.icon(
+                icon: Icon(
+                  Icons.print,
+                  color: Colors.white,
+                  size: Dimensions.Size_20,
+                ),
+                onPressed: () {
+                  save_data(arg_home, true);
+                },
+                label: Text(
+                  "حفظ وطباعة ",
+                  style: TextStyle(
+                      color: Colors.white, fontSize: Dimensions.Size_30 / 2),
+                )),
+          ),
+          Container(
+            child: TextButton.icon(
+              icon: Icon(
+                Icons.save,
+                color: Colors.white,
+                size: Dimensions.Size_20,
+              ),
+              onPressed: () {
+                save_data(arg_home, false);
               },
               label: Text(
-                "حفظ وطباعة ",
-                style: TextStyle(color: Colors.white),
-              )),
-          TextButton.icon(
-            icon: Icon(
-              Icons.save,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              save_data(arg_home, false);
-            },
-            label: Text(
-              "حفظ",
-              style: TextStyle(color: Colors.white),
+                "حفظ",
+                style: TextStyle(
+                    color: Colors.white, fontSize: Dimensions.Size_30 / 2),
+              ),
             ),
           ),
-        ],
-        leading: TextButton(
-          child: Text(
-            "رجوع",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            Navigator.of(context).popAndPushNamed(MyHomeScreen.name_route);
-          },
-        ),
+        ]),
       ),
-      body: GetData(),
-    );
+      Expanded(child: GetData())
+    ]));
   }
 
   void save_data(Map<String, Object> arg_home, bool print) {
@@ -153,12 +169,13 @@ class _addOrderState extends State<addOrder> {
             title: Text(
               snapshot.data![i].gname,
               textAlign: TextAlign.right,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: Dimensions.Size_20),
             ),
 
             children: names!
                 .map((e) => Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(Dimensions.Size_10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -166,7 +183,8 @@ class _addOrderState extends State<addOrder> {
                             flex: 1,
                             child: Text(
                               e.coun.toString() == "0" ? "" : e.coun.toString(),
-                              style: TextStyle(fontSize: 25),
+                              style:
+                                  TextStyle(fontSize: Dimensions.Size_50 / 2),
                             ),
                           ),
                           Expanded(
@@ -175,12 +193,14 @@ class _addOrderState extends State<addOrder> {
                               children: [
                                 Text(
                                   e.pname,
-                                  style: TextStyle(fontSize: 20),
+                                  style:
+                                      TextStyle(fontSize: Dimensions.Size_20),
                                 ),
                                 Text(
                                   " (" + tomoney(e.pprice.toString()) + ")",
                                   style: TextStyle(
-                                      fontSize: 12, color: Color(0xDCCC1515)),
+                                      fontSize: Dimensions.Size_30 / 2,
+                                      color: Color(0xDCCC1515)),
                                 ),
                               ],
                             ),
@@ -195,7 +215,7 @@ class _addOrderState extends State<addOrder> {
                               },
                               child: Icon(
                                 CupertinoIcons.add_circled_solid,
-                                size: 30,
+                                size: Dimensions.Size_30,
                                 color: Colors.green,
                               ),
                             ),
@@ -210,7 +230,7 @@ class _addOrderState extends State<addOrder> {
                               },
                               child: Icon(
                                 CupertinoIcons.minus_circle_fill,
-                                size: 30,
+                                size: Dimensions.Size_30,
                                 color: Colors.deepOrange,
                               ),
                             ),

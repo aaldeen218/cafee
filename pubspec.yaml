@@ -39,6 +39,7 @@ dependencies:
   shared_preferences:
   printing: ^5.9.3
   flutter_svg:
+  get: ^4.6.5
 
 
 

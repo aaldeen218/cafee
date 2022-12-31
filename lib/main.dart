@@ -1,6 +1,7 @@
 import 'package:cafee/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import 'Login/login.dart';
 import 'Login/settings.dart';
@@ -24,7 +25,7 @@ void main() {
     ),
     // Use [light] for white status bar and [dark] for black status bar.
   );
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
     theme: ThemeData(
       accentColor: Colors.green,
       scaffoldBackgroundColor: Color(0xFFF2F0E4),

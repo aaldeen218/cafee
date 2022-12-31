@@ -1,3 +1,4 @@
+import 'package:cafee/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,21 +31,21 @@ class _ListOfinvoicesState extends State<listOfinvoicesDetalis> {
                   Text(
                     "الاجمالي",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: Dimensions.Size_20,
                         color: Colors.white,
                         fontWeight: FontWeight.w800),
                   ),
                   Text(
                     "الكمية",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: Dimensions.Size_20,
                         color: Colors.white,
                         fontWeight: FontWeight.w800),
                   ),
                   Text(
                     "اسم الصنف",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: Dimensions.Size_20,
                         color: Colors.white,
                         fontWeight: FontWeight.w800),
                   ),
@@ -99,7 +100,7 @@ class _ListOfinvoicesState extends State<listOfinvoicesDetalis> {
                         child: Text(
                           tomoney(snapshot.data![i].total),
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: Dimensions.Size_30 / 2,
                               color: Colors.deepOrange,
                               fontWeight: FontWeight.w900),
                           textAlign: TextAlign.center,
@@ -110,7 +111,7 @@ class _ListOfinvoicesState extends State<listOfinvoicesDetalis> {
                         child: Text(
                           snapshot.data![i].qty,
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: Dimensions.Size_30 / 2,
                               color: Colors.green,
                               fontWeight: FontWeight.w900),
                           textAlign: TextAlign.center,
@@ -121,7 +122,7 @@ class _ListOfinvoicesState extends State<listOfinvoicesDetalis> {
                         child: Text(
                           snapshot.data![i].pname,
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: Dimensions.Size_30 / 2,
                               color: Colors.blue,
                               fontWeight: FontWeight.w900),
                           textAlign: TextAlign.center,
@@ -134,8 +135,8 @@ class _ListOfinvoicesState extends State<listOfinvoicesDetalis> {
             ),
             Divider(
               color: Colors.black26,
-              indent: 10,
-              endIndent: 10,
+              indent: Dimensions.Size_10,
+              endIndent: Dimensions.Size_10,
             )
           ],
         );

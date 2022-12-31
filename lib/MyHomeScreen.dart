@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:cafee/dimension.dart';
 import 'package:cafee/pre_invoice/PreInvoice.dart';
 import 'package:cafee/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'Login/login.dart';
 import 'Order/addOrder.dart';
@@ -30,7 +32,7 @@ class MyHomeScreen extends StatefulWidget {
 class _MyHomeScreenState extends State<MyHomeScreen> {
   var myController = TextEditingController();
   var inputFormatDate = DateFormat('yyyy-MM-dd');
-  var inputFormatTime = DateFormat('HH:MM');
+  var inputFormatTime = DateFormat('HH:mm');
   int index = 0;
   final _pageViewController = PageController();
 
@@ -51,12 +53,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("height is" + MediaQuery.of(context).size.height.toString());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             children: [
               Container(
+                height: Dimensions.homePageAppHeight,
                 decoration: BoxDecoration(
                     color: appBarColor2,
                     borderRadius: BorderRadius.only(
@@ -70,7 +74,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         CupertinoIcons.person_circle,
                         color: Colors.blueGrey,
                       ),
-                      iconSize: 40,
+                      iconSize: Dimensions.homePageIconSize,
                       onPressed: () {
                         final Alert = AlertDialog(
                           title: Column(
@@ -154,7 +158,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     Text(
                       pname,
                       style: TextStyle(
-                          fontFamily: "Digi-Madasi-Bold", fontSize: 20),
+                          fontFamily: "Digi-Madasi-Bold",
+                          fontSize: Dimensions.homePagefontSizeHedar),
                     ),
                     SizedBox(
                       width: 25,
@@ -234,7 +239,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                                                                 9999999)
                                                             .toString(),
                                                     bdate: DateTime.now(),
-                                                    cname: "cname",
+                                                    cname: ufullname,
                                                     btotal: 0,
                                                     bnote: myController.text,
                                                     bstat: "bstat",
@@ -270,7 +275,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         child: Icon(
                           CupertinoIcons.add,
                           color: Colors.green,
-                          size: 35,
+                          size: Dimensions.Size_30,
                         ),
                       ),
                     ),
@@ -287,7 +292,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
           animationDuration: Duration(milliseconds: 1500),
           selectedIndex: index,
-          height: 60,
+          height: Dimensions.Size_60,
           onDestinationSelected: (x) => setState(() {
             // setState(() {
             //   index = x;
@@ -296,28 +301,38 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 duration: Duration(milliseconds: 2000),
                 curve: Curves.elasticOut);
           }),
-          destinations: const [
+          destinations: [
             NavigationDestination(
                 icon: Icon(
                   Icons.home_outlined,
                   color: Colors.white,
+                  size: Dimensions.Size_30,
                 ),
-                selectedIcon: Icon(Icons.home),
+                selectedIcon: Icon(
+                  Icons.home,
+                  size: Dimensions.Size_30,
+                ),
                 label: "الطبات"),
             NavigationDestination(
                 icon: Icon(
                   CupertinoIcons.square_list,
                   color: Colors.white,
+                  size: Dimensions.Size_30,
                 ),
-                selectedIcon: Icon(CupertinoIcons.square_list_fill),
+                selectedIcon: Icon(
+                  CupertinoIcons.square_list_fill,
+                  size: Dimensions.Size_30,
+                ),
                 label: "المينيو"),
             NavigationDestination(
                 icon: Icon(
                   Icons.history_outlined,
                   color: Colors.white,
+                  size: Dimensions.Size_30,
                 ),
                 selectedIcon: Icon(
                   Icons.history,
+                  size: Dimensions.Size_30,
                 ),
                 label: "السابقة "),
           ],
@@ -381,7 +396,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       Text(
                         "طاولة  " + snapshot.data![i].bnote,
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.fontSize_15,
                             color: Colors.black,
                             fontWeight: FontWeight.w800),
                         textAlign: TextAlign.center,
@@ -389,14 +404,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       Text(
                         inputFormatDate.format(snapshot.data![i].bdate),
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.fontSize_15,
                             color: Colors.blue,
                             fontWeight: FontWeight.w800),
                       ),
                       Text(
                         inputFormatTime.format(snapshot.data![i].bdate),
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.fontSize_15,
                             color: Colors.black,
                             fontWeight: FontWeight.w800),
                       ),
@@ -404,7 +419,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         "الاجمالي " +
                             tomoney(snapshot.data![i].btotal.toString()),
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.fontSize_15,
                             color: Colors.redAccent,
                             fontWeight: FontWeight.w800),
                         textAlign: TextAlign.center,
@@ -427,8 +442,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                               children: [
                                 Image.asset(
                                   'assets/images/add_order.png',
-                                  height: 50,
-                                  width: 50,
+                                  height: Dimensions.Size_50,
+                                  width: Dimensions.Size_50,
                                 ),
                                 Icon(Icons.playlist_add),
                               ],

@@ -2,6 +2,7 @@ import 'package:cafee/mainColor.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../dimension.dart';
 import 'OrderModels.dart';
 
 class OrderInvoiceDetalis extends StatelessWidget {
@@ -28,14 +29,15 @@ class OrderInvoiceDetalis extends StatelessWidget {
                         "اجمالي الفاتورة\n",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w900),
+                            fontSize: Dimensions.Size_20,
+                            fontWeight: FontWeight.w900),
                       ),
                       Text(
                         tomoney(arg_home["total"].toString()),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xFFA63737),
-                            fontSize: 23,
+                            fontSize: Dimensions.Size_50 / 2,
                             fontWeight: FontWeight.w900),
                       ),
                     ],
@@ -81,26 +83,28 @@ show(AsyncSnapshot<List<OrderModels>> snapshot, context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.Size_20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   tomoney(snapshot.data![i].total.toString()),
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: Dimensions.Size_20,
                       color: Color(0xFFA63737),
                       fontWeight: FontWeight.w800),
                 ),
                 Text(
                   snapshot.data![i].pname,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      fontSize: Dimensions.Size_20,
+                      fontWeight: FontWeight.w800),
                 ),
                 Text(
                   snapshot.data![i].qty.toString(),
                   style: TextStyle(
                       color: Colors.green,
-                      fontSize: 20,
+                      fontSize: Dimensions.Size_20,
                       fontWeight: FontWeight.w800),
                 ),
               ],

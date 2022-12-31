@@ -1,3 +1,4 @@
+import 'package:cafee/dimension.dart';
 import 'package:flutter/material.dart';
 
 import '../MyHomeScreen.dart';
@@ -73,12 +74,13 @@ class _addOrderState extends State<menu> {
             title: Text(
               snapshot.data![i].gname,
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: Dimensions.Size_20),
             ),
 
             children: names
                 .map((e) => Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(Dimensions.Size_10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -87,7 +89,7 @@ class _addOrderState extends State<menu> {
                               "(" + tomoney(e.pprice) + ")",
                               style: TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 20,
+                                  fontSize: Dimensions.Size_20,
                                   color: Colors.green),
                             ),
                           ),
@@ -95,7 +97,7 @@ class _addOrderState extends State<menu> {
                             child: Text(
                               e.pname,
                               textAlign: TextAlign.end,
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: Dimensions.Size_20),
                             ),
                           ),
                         ],

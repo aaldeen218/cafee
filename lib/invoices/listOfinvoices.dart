@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../dimension.dart';
 import 'invoicesModule.dart';
 
 String uid = "";
@@ -19,15 +20,19 @@ class ListOfinvoices extends StatefulWidget {
 }
 
 class _ListOfinvoicesState extends State<ListOfinvoices> {
-  var inputFormatDate = DateFormat('yyyy-MM-dd');
+  var inputFormatDate = DateFormat('yyyy-MM-dd || HH:mm:ss');
 
   @override
   void initState() {
     Getmyshare();
-    var inputFormat = DateFormat('yyyy-MM-dd');
+    var inputFormat = DateFormat('yyyy-MM-dd 04:00:00');
     var date_now = inputFormat.format(DateTime.now());
+
+    var date_now2 = inputFormat.format(DateTime.now().add(Duration(hours: 28)));
     date1 = date_now;
-    date2 = date_now;
+    date2 = date_now2;
+    print(date1);
+    print(date2);
   }
 
   Getmyshare() async {
@@ -49,7 +54,7 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
         child: Icon(
           Icons.calendar_today_outlined,
           color: Color(0xFFDB5151),
-          size: 30,
+          size: Dimensions.Size_30,
         ),
       ),
     );
@@ -67,13 +72,15 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
 
     return (setState(() {
       dateRange = newDateRange!;
-      var inputFormat = DateFormat('yyyy-MM-dd');
-      date1 = inputFormat.format(newDateRange.start);
-      date2 = inputFormat.format(newDateRange.end);
+      var inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+      date1 = inputFormat.format(newDateRange.start.add(Duration(hours: 4)));
+      date2 = inputFormat.format(newDateRange.end.add(Duration(hours: 28)));
       (setState(() {
-        var inputFormat = DateFormat('yyyy-MM-dd');
-        date1 = inputFormat.format(newDateRange.start);
-        date2 = inputFormat.format(newDateRange.end);
+        var inputFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+        date1 = inputFormat.format(newDateRange.start.add(Duration(hours: 4)));
+        date2 = inputFormat.format(newDateRange.end.add(Duration(hours: 28)));
+        print(date1.toString());
+        print(date2.toString());
       }));
     }));
   }
@@ -107,7 +114,7 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
                             color: Colors.black26.withOpacity(0.2),
                             child: Text(
                               "الاجمالي " + sumVal(snapshot.data),
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: Dimensions.Size_20),
                               textAlign: TextAlign.center,
                             ))
                         : Text(""),
@@ -131,8 +138,8 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
           child: Card(
             color: Colors.teal[300],
             elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.Size_10 / 2)),
             child: Row(
               children: [
                 Expanded(
@@ -143,7 +150,7 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
                       Text(
                         "طاولة  " + snapshot.data![i].bnote,
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.Size_30 / 2,
                             color: Colors.white,
                             fontWeight: FontWeight.w800),
                         textAlign: TextAlign.center,
@@ -152,7 +159,7 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
                         "الاجمالي " +
                             tomoney(snapshot.data![i].btotal.toString()),
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.Size_30 / 2,
                             color: Colors.white,
                             fontWeight: FontWeight.w800),
                         textAlign: TextAlign.center,
@@ -160,7 +167,7 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
                       Text(
                         inputFormatDate.format(snapshot.data![i].bdate),
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Dimensions.Size_30 / 2,
                             color: Colors.white,
                             fontWeight: FontWeight.w800),
                         textAlign: TextAlign.center,
