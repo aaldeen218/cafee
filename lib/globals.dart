@@ -15,5 +15,5 @@ var empGender_global = "";
 mysh() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   http = pref.getString("http").toString();
-  print(http + " Http");
+  //print(http + " Http");
 }

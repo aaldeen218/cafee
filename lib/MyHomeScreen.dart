@@ -53,7 +53,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("height is" + MediaQuery.of(context).size.height.toString());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -72,7 +71,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     IconButton(
                       icon: Icon(
                         CupertinoIcons.person_circle,
-                        color: Colors.blueGrey,
+                        color: Colors.white,
                       ),
                       iconSize: Dimensions.homePageIconSize,
                       onPressed: () {
@@ -174,6 +173,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     Text(
                       pname,
                       style: TextStyle(
+                          color: Colors.white,
                           fontFamily: "Digi-Madasi-Bold",
                           fontSize: Dimensions.homePagefontSizeHedar),
                     ),

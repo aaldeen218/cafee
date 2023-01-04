@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../dimension.dart';
+import '../mainColor.dart';
 import 'invoicesModule.dart';
 
 String uid = "";
@@ -65,10 +66,28 @@ class _ListOfinvoicesState extends State<ListOfinvoices> {
         DateTimeRange(start: DateTime.now(), end: DateTime.now());
     var dateRange;
     final newDateRange = await showDateRangePicker(
-        context: context,
-        firstDate: DateTime(2018),
-        lastDate: DateTime(2025),
-        initialDateRange: dateRange ?? initialDateRange);
+      context: context,
+      firstDate: DateTime(2018),
+      lastDate: DateTime(2025),
+      initialDateRange: dateRange ?? initialDateRange,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: appBarColor2, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.red, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
 
     return (setState(() {
       dateRange = newDateRange!;

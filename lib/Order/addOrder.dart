@@ -41,6 +41,7 @@ class _addOrderState extends State<addOrder> {
 
   @override
   Widget build(BuildContext context) {
+    print("Buld ");
     //  futureAlbum = items_madule.showdata();
     //futureAlbum.then((value) => futureString = value);
     final arg_home =

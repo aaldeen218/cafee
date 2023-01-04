@@ -14,8 +14,10 @@ class categories_madule {
 
     http.Response response = await http.get(url);
     var json = response.body;
+
     List<Categories> user1 = categoriesFromJson(json);
 // print(user1[0].patName);
+    print("categories_madule");
     return user1;
   }
 // To parse this JSON data, do
