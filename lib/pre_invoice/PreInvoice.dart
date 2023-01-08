@@ -63,6 +63,7 @@ class PreInvoices {
     required this.bstat,
     required this.uid,
     required this.un,
+    this.count_iinvoice = "",
   });
 
   String ID;
@@ -74,6 +75,7 @@ class PreInvoices {
   String bstat;
   String uid;
   String un;
+  String count_iinvoice;
 
   factory PreInvoices.fromJson(Map<String, dynamic> json) => PreInvoices(
         ID: json["id"],
@@ -85,6 +87,7 @@ class PreInvoices {
         bstat: json["bstat"],
         uid: json["uid"],
         un: json["un"],
+        count_iinvoice: json["count_iinvoice"],
       );
 
   Map<String, dynamic> toJson() => {

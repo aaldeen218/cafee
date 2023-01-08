@@ -173,7 +173,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     Text(
                       pname,
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFFFFFFFF),
                           fontFamily: "Digi-Madasi-Bold",
                           fontSize: Dimensions.homePagefontSizeHedar),
                     ),
@@ -195,6 +195,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       floatingActionButton: FloatingActionButton(
                         tooltip: "اضافة طاولة",
                         backgroundColor: Colors.white,
+                        elevation: 5,
                         onPressed: () {
                           final Alert = AlertDialog(
                             title: Column(
@@ -289,8 +290,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                               });
                         },
                         child: Icon(
-                          CupertinoIcons.add,
-                          color: Colors.green,
+                          Icons.add,
+                          color: appBarColor2,
                           size: Dimensions.Size_30,
                         ),
                       ),
@@ -303,58 +304,65 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: NavigationBar(
-          backgroundColor: appBarColor2,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          animationDuration: Duration(milliseconds: 1000),
-          selectedIndex: index,
-          height: Dimensions.Size_60,
-          onDestinationSelected: (x) => setState(() {
-            // setState(() {
-            //   index = x;
-            // });
-            _pageViewController.animateToPage(x,
-                duration: Duration(milliseconds: 1500),
-                curve: Curves.elasticOut);
-          }),
-          destinations: [
-            NavigationDestination(
-                tooltip: "الطلبات",
-                icon: Icon(
-                  Icons.home_outlined,
-                  color: Colors.white,
-                  size: Dimensions.Size_30,
-                ),
-                selectedIcon: Icon(
-                  Icons.home,
-                  size: Dimensions.Size_30,
-                ),
-                label: ""),
-            NavigationDestination(
-                tooltip: "المنيو",
-                icon: Icon(
-                  CupertinoIcons.square_list,
-                  color: Colors.white,
-                  size: Dimensions.Size_30,
-                ),
-                selectedIcon: Icon(
-                  CupertinoIcons.square_list_fill,
-                  size: Dimensions.Size_30,
-                ),
-                label: ""),
-            NavigationDestination(
-                tooltip: "الفواتير السابقة",
-                icon: Icon(
-                  Icons.history_outlined,
-                  color: Colors.white,
-                  size: Dimensions.Size_30,
-                ),
-                selectedIcon: Icon(
-                  Icons.history,
-                  size: Dimensions.Size_30,
-                ),
-                label: ""),
-          ],
+        bottomNavigationBar: Container(
+          height: Dimensions.Size_50 * 1.5,
+          decoration: BoxDecoration(
+              color: appBarColor2,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimensions.Size_50))),
+          child: NavigationBar(
+            backgroundColor: Colors.white.withOpacity(0.1),
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+            animationDuration: Duration(milliseconds: 1000),
+            selectedIndex: index,
+            height: Dimensions.Size_60,
+            onDestinationSelected: (x) => setState(() {
+              // setState(() {
+              //   index = x;
+              // });
+              _pageViewController.animateToPage(x,
+                  duration: Duration(milliseconds: 1500),
+                  curve: Curves.elasticOut);
+            }),
+            destinations: [
+              NavigationDestination(
+                  tooltip: "الطلبات",
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: Colors.white,
+                    size: Dimensions.Size_30,
+                  ),
+                  selectedIcon: Icon(
+                    Icons.home,
+                    size: Dimensions.Size_30,
+                  ),
+                  label: ""),
+              NavigationDestination(
+                  tooltip: "المنيو",
+                  icon: Icon(
+                    CupertinoIcons.square_list,
+                    color: Colors.white,
+                    size: Dimensions.Size_30,
+                  ),
+                  selectedIcon: Icon(
+                    CupertinoIcons.square_list_fill,
+                    size: Dimensions.Size_30,
+                  ),
+                  label: ""),
+              NavigationDestination(
+                  tooltip: "الفواتير السابقة",
+                  icon: Icon(
+                    Icons.history_outlined,
+                    color: Colors.white,
+                    size: Dimensions.Size_30,
+                  ),
+                  selectedIcon: Icon(
+                    Icons.history,
+                    size: Dimensions.Size_30,
+                  ),
+                  label: ""),
+            ],
+          ),
         ));
   }
 
@@ -405,74 +413,91 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             color: Color(0xFFDAF1EC),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimensions.Size_10 / 2)),
-            child: Row(
+            child: Stack(
               children: [
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "طاولة  " + snapshot.data![i].bnote,
-                        style: TextStyle(
-                            fontSize: Dimensions.fontSize_15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        inputFormatDate.format(snapshot.data![i].bdate),
-                        style: TextStyle(
-                            fontSize: Dimensions.fontSize_15,
-                            color: Colors.blue,
-                            fontWeight: FontWeight.w800),
-                      ),
-                      Text(
-                        inputFormatTime.format(snapshot.data![i].bdate),
-                        style: TextStyle(
-                            fontSize: Dimensions.fontSize_15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800),
-                      ),
-                      Text(
-                        "الاجمالي " +
-                            tomoney(snapshot.data![i].btotal.toString()),
-                        style: TextStyle(
-                            fontSize: Dimensions.fontSize_15,
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.w800),
-                        textAlign: TextAlign.center,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushReplacementNamed(
-                                  addOrder.name_route,
-                                  arguments: {
-                                    "ID": snapshot.data![i].bid,
-                                    "table": snapshot.data![i].bnote
-                                  });
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/add_order.png',
-                                  height: Dimensions.Size_50,
-                                  width: Dimensions.Size_50,
-                                ),
-                                Icon(Icons.playlist_add),
-                              ],
-                            ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "طاولة  " + snapshot.data![i].bnote,
+                      style: TextStyle(
+                          fontSize: Dimensions.fontSize_15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      inputFormatDate.format(snapshot.data![i].bdate),
+                      style: TextStyle(
+                          fontSize: Dimensions.fontSize_15,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      inputFormatTime.format(snapshot.data![i].bdate),
+                      style: TextStyle(
+                          fontSize: Dimensions.fontSize_15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      "الاجمالي " +
+                          tomoney(snapshot.data![i].btotal.toString()),
+                      style: TextStyle(
+                          fontSize: Dimensions.fontSize_15,
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.w800),
+                      textAlign: TextAlign.center,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushReplacementNamed(
+                                addOrder.name_route,
+                                arguments: {
+                                  "ID": snapshot.data![i].bid,
+                                  "table": snapshot.data![i].bnote
+                                });
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/add_order.png',
+                                height: Dimensions.Size_50,
+                                width: Dimensions.Size_50,
+                              ),
+                              Icon(Icons.playlist_add),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    width: Dimensions.Size_20,
+                    height: Dimensions.Size_20,
+                    child: Text(
+                      snapshot.data![i].count_iinvoice.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: Dimensions.Size_10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.Size_10 / 2),
+                        color: Colors.redAccent.withOpacity(0.8)),
+                  ),
+                )
               ],
             ),
           ),
