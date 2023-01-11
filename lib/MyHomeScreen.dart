@@ -31,7 +31,7 @@ class MyHomeScreen extends StatefulWidget {
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
   var myController = TextEditingController();
-  var inputFormatDate = DateFormat('yyyy-MM-dd');
+  var inputFormatDate = DateFormat('yyyy-MM-dd'); n
   var inputFormatTime = DateFormat('HH:mm');
   int index = 0;
   final _pageViewController = PageController();
